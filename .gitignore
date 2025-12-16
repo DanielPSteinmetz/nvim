@@ -1,0 +1,7 @@
+# Lazy.nvim
+/lazy-lock.json
+/lazy/
+
+# Neovim state
+/shada/
+
