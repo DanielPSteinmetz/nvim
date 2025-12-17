@@ -43,9 +43,12 @@ return {
 		})
 
 		-- C / C++
-		vim.lsp.config('clangd', {
-			capabilities = capabilities,
-		})
+    vim.lsp.config('clangd', {
+      capabilities = capabilities,
+      init_options = {
+        fallbackFlags = { '-std=c++20' },
+      },
+    })
 
     -- bash
 		vim.lsp.config("bashls", {
