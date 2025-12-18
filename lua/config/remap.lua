@@ -33,3 +33,6 @@ vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', {silent = true})
 
 -- Custom mappings
 vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
+
+vim.keymap.set('n', 'H', '^')
+vim.keymap.set('n', 'L', '$')
