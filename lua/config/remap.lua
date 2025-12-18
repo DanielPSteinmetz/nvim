@@ -15,6 +15,7 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('x', '<leader>p', '"_dP')
+vim.keymap.set('n', '<leader>p', '"+p')
 
 vim.keymap.set('n', '<leader>y', '"+y')
 vim.keymap.set('v', '<leader>y', '"+y')
@@ -36,3 +37,31 @@ vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
 
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
+
+vim.keymap.set('n', '<leader>w', '<cmd>:wa<CR>')
+
+vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
+
+local function toggle_quickfix()
+  local qf_exists = false
+  -- Check if any window in the current tab is a quickfix window
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+      break
+    end
+  end
+
+  if qf_exists then
+    vim.cmd("cclose")
+  else
+    -- Check if the quickfix list is empty before opening
+    if vim.tbl_isempty(vim.fn.getqflist()) then
+      print("no quickfixes")
+    else
+      vim.cmd("copen")
+    end
+  end
+end
+
+vim.keymap.set('n', '<leader>q', toggle_quickfix, { desc = "Toggle Quickfix" })
