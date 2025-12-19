@@ -38,9 +38,11 @@ vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
 
-vim.keymap.set('n', '<leader>w', '<cmd>:wa<CR>')
+vim.keymap.set({"n", "i", "v"}, "<C-s>", "<Cmd>:wa<CR>", { desc = "Save file" })
 
 vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
+
+vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR>')
 
 local function toggle_quickfix()
   local qf_exists = false
@@ -65,3 +67,14 @@ local function toggle_quickfix()
 end
 
 vim.keymap.set('n', '<leader>q', toggle_quickfix, { desc = "Toggle Quickfix" })
+
+vim.keymap.set("n", "<leader>sh", function()
+  local ext = vim.fn.expand("%:e")
+  if ext == "hpp" then
+    vim.cmd("edit %:r.cpp")
+  else
+    vim.cmd("edit %:r.hpp")
+  end
+end, { desc = "switch header/source" })
+
+
