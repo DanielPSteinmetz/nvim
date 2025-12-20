@@ -38,7 +38,7 @@ vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
 
-vim.keymap.set({"n", "i", "v"}, "<M-w>", "<Cmd>:wa<CR>", { desc = "Save file" })
+vim.keymap.set({"n", "i", "v"}, "<C-w>", "<Cmd>:wa<CR>", { desc = "Save file" })
 
 vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
 
