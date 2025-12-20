@@ -1,23 +1,63 @@
 return {
+  -- Core DAP
   {
     "mfussenegger/nvim-dap",
   },
+
+  -- DAP UI
   {
     "rcarriga/nvim-dap-ui",
-    dependencies = {
-      "mfussenegger/nvim-dap",
-      "nvim-neotest/nvim-nio",
-    },
+    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio", },
     config = function()
-      require("dapui").setup()
+      local dap, dapui = require("dap"), require("dapui")
+
+      dapui.setup({
+        icons = { expanded = "▾", collapsed = "▸" },
+        mappings = {
+          expand = { "<CR>", "<2-LeftMouse>" },
+          open = "o",
+          remove = "d",
+          edit = "e",
+          repl = "r",
+        },
+        layouts = {
+          {
+            elements = {
+              { id = "scopes", size = 0.25 },
+              { id = "breakpoints", size = 0.25 },
+              { id = "stacks", size = 0.25 },
+              { id = "watches", size = 0.25 },
+            },
+            size = 40,
+            position = "left",
+          },
+          {
+            elements = { "repl" },
+            size = 10,
+            position = "bottom",
+          },
+        },
+        floating = {
+          border = "rounded",
+          mappings = { close = { "q", "<Esc>" } },
+        },
+        windows = { indent = 1 },
+      })
+
+      -- Auto open/close UI
+      dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+      dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+      dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+      -- Optional keybinding to toggle UI manually
+      vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "DAP UI: Toggle" })
     end,
   },
+
+  -- Mason DAP integration
   {
     "jay-babu/mason-nvim-dap.nvim",
-    dependencies = {
-      "williamboman/mason.nvim",
-      "mfussenegger/nvim-dap",
-    },
+    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     config = function()
       require("mason-nvim-dap").setup({
         ensure_installed = { "codelldb" },
@@ -32,6 +72,7 @@ return {
     config = function()
       local dap = require("dap")
 
+      -- Adapter
       dap.adapters.codelldb = {
         type = "server",
         port = "${port}",
@@ -41,28 +82,39 @@ return {
         },
       }
 
+      -- Configurations
       dap.configurations.cpp = {
         {
-          name = "Launch jsonParser",
+          name = "Launch",
           type = "codelldb",
           request = "launch",
           program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            local input = vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            if input == "" then
+              local cwd = vim.fn.getcwd()
+              return cwd .. "/" .. vim.fn.fnamemodify(cwd, ":t")
+            end
+            return input
           end,
           cwd = "${workspaceFolder}",
           stopOnEntry = false,
-          args = {},
+          args = { "test.json" },
         },
       }
-
       dap.configurations.c = dap.configurations.cpp
 
       -- Keymaps
-      vim.keymap.set("n", "<F5>", dap.continue)
-      vim.keymap.set("n", "<F10>", dap.step_over)
-      vim.keymap.set("n", "<F11>", dap.step_into)
-      vim.keymap.set("n", "<F12>", dap.step_out)
-      vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint)
+      vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "DAP: Continue" })
+      vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "DAP: Step Over" })
+      vim.keymap.set("n", "<C-_>", dap.step_over, { desc = "DAP: Step Over" })
+      vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "DAP: Step Into" })
+      vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "DAP: Step Out" })
+      vim.keymap.set("n", "<leader>dr", dap.repl.toggle, { desc = "DAP: Toggle REPL" })
+      vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP: Toggle Breakpoint" })
+      vim.keymap.set("n", "<leader>dq", function()
+        dap.terminate()
+        require("dapui").close()
+      end, { desc = "DAP: Quit and close UI" })
     end,
   },
 }

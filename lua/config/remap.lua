@@ -25,10 +25,10 @@ vim.keymap.set('n', '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>d', '"_d')
 
 vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float)
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz')
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz')
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz')
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz')
+vim.keymap.set('n', '<C-j>', '<cmd>cnext<CR>zz')
+vim.keymap.set('n', '<C-k>', '<cmd>cprev<CR>zz')
+vim.keymap.set('n', '<leader>j', '<cmd>lnext<CR>zz')
+vim.keymap.set('n', '<leader>k', '<cmd>lprev<CR>zz')
 
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', {silent = true})
 
@@ -38,7 +38,7 @@ vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
 
-vim.keymap.set({"n", "i", "v"}, "<C-s>", "<Cmd>:wa<CR>", { desc = "Save file" })
+vim.keymap.set({"n", "i", "v"}, "<M-w>", "<Cmd>:wa<CR>", { desc = "Save file" })
 
 vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
 
