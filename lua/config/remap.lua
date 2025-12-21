@@ -7,6 +7,7 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('n', 'J', 'mzJ`z')
+vim.keymap.set('s', 'J', 'J')
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -43,6 +44,8 @@ vim.keymap.set({"n", "i", "v"}, "<M-w>", "<cmd>wa<CR>", { desc = "Save file" })
 vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
 
 vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR>')
+
+vim.keymap.set('n', '<leader>=', 'gg=G``')
 
 local function toggle_quickfix()
   local qf_exists = false
