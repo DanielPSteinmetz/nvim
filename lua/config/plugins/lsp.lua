@@ -19,6 +19,7 @@ return {
 				"bashls",
 				"clangd",
         "pyright",
+        "rust_analyzer",
 			},
 		})
 
@@ -69,6 +70,11 @@ return {
 
     --python
     vim.lsp.config("pyright", {
+      capabilities = capabilities,
+    })
+
+    --rust
+    vim.lsp.config("rust_analyzer", {
       capabilities = capabilities,
     })
 

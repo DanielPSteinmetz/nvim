@@ -34,7 +34,6 @@ vim.keymap.set('n', '<leader>k', '<cmd>lprev<CR>zz')
 vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', {silent = true})
 
 -- Custom mappings
-vim.keymap.set('n', '<leader>r', '<cmd>!make<CR>')
 
 vim.keymap.set('n', 'H', '^')
 vim.keymap.set('n', 'L', '$')
@@ -45,7 +44,8 @@ vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
 
 vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR>')
 
-vim.keymap.set('n', '<leader>=', 'gg=G``')
+vim.keymap.set('n', '<leader>=', 'gg=G``zz')
+
 
 local function toggle_quickfix()
   local qf_exists = false
@@ -80,4 +80,15 @@ vim.keymap.set("n", "<leader>sh", function()
   end
 end, { desc = "switch header/source" })
 
+-- Run file
+vim.keymap.set("n", "<leader>r", function()
+  local ft = vim.bo.filetype
 
+  if ft == "cpp" or ft == "c" then
+    vim.cmd("!make")
+  elseif ft == "rust" then
+    vim.cmd("!cargo run")
+  else
+    print("No run command for filetype: " .. ft)
+  end
+end, { desc = "Run project" })

@@ -11,6 +11,7 @@ return {
 				"javascript",
 				"cpp",
         "python",
+        "rust",
 			},
 			auto_install = true,
 			highlight = { enable = true },
