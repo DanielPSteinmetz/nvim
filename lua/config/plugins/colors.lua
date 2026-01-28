@@ -10,8 +10,8 @@ return {
     vim.api.nvim_create_autocmd("ColorScheme", {
       callback = function()
         -- Global transparency
-        vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+        vim.api.nvim_set_hl(0, "Normal",      { bg = "none" })
+        vim.api.nvim_set_hl(0, "NormalNC",    { bg = "none" })
         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
         -- Splits
@@ -24,12 +24,13 @@ return {
         vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 
         -- Nvim-tree
-        vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = "none" })
-        vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = "none" })
+        vim.api.nvim_set_hl(0, "NvimTreeNormal",      { bg = "none" })
+        vim.api.nvim_set_hl(0, "NvimTreeNormalNC",    { bg = "none" })
         vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = "none" })
       end,
     })
 
+    -- 🔑Apply immediately for first load
     vim.cmd("doautocmd ColorScheme")
   end,
 }

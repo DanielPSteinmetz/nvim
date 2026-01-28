@@ -11,6 +11,8 @@ vim.keymap.set('s', 'J', 'J')
 
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
+vim.keymap.set('n', '<C-f>', '<C-f>zz')
+vim.keymap.set('n', '<C-b>', '<C-b>zz')
 
 vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
@@ -45,6 +47,25 @@ vim.keymap.set('n', '#p', 'i#pragma once<CR><CR><Esc>')
 vim.keymap.set('n', '<leader>vs', '<cmd>vs<CR>')
 
 vim.keymap.set('n', '<leader>=', 'gg=G``zz')
+
+-- Window movement
+vim.keymap.set("n", "<M-h>", '<C-w>h')
+vim.keymap.set("n", "<M-j>", '<C-w>j')
+vim.keymap.set("n", "<M-k>", '<C-w>k')
+vim.keymap.set("n", "<M-l>", '<C-w>l')
+
+-- Terminal movement
+vim.keymap.set("t", "<M-h>", '<C-\\><C-n><C-w>h')
+vim.keymap.set("t", "<M-j>", '<C-\\><C-n><C-w>j')
+vim.keymap.set("t", "<M-k>", '<C-\\><C-n><C-w>k')
+vim.keymap.set("t", "<M-l>", '<C-\\><C-n><C-w>l')
+vim.keymap.set("t", "<Esc><Esc>", '<C-\\><C-n>', { desc = "Exit terminal mode" })
+
+-- Window resize
+vim.keymap.set({'n', 't'}, "<C-Up>",    "<cmd>resize +1<CR>")
+vim.keymap.set({'n', 't'}, "<C-Down>",  "<cmd>resize -1<CR>")
+vim.keymap.set({'n', 't'}, "<C-Left>",  "<cmd>vertical resize -1<CR>")
+vim.keymap.set({'n', 't'}, "<C-Right>", "<cmd>vertical resize +1<CR>")
 
 
 local function toggle_quickfix()
@@ -82,12 +103,17 @@ end, { desc = "switch header/source" })
 
 -- Run file
 vim.keymap.set("n", "<leader>r", function()
+  -- Save before running
+  vim.cmd("wa")
+
   local ft = vim.bo.filetype
 
   if ft == "cpp" or ft == "c" then
     vim.cmd("!make")
   elseif ft == "rust" then
     vim.cmd("!cargo run")
+  elseif ft == "python" then
+    vim.cmd("!python3 %")
   else
     print("No run command for filetype: " .. ft)
   end
