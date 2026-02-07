@@ -9,7 +9,7 @@ return {
       filters = {
          dotfiles = true,
          custom = {
-           "*.o",
+           -- "*.o",
          }
       },
       actions = {

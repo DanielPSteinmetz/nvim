@@ -68,6 +68,10 @@ vim.keymap.set({'n', 't'}, "<C-Left>",  "<cmd>vertical resize -1<CR>")
 vim.keymap.set({'n', 't'}, "<C-Right>", "<cmd>vertical resize +1<CR>")
 
 
+-- nerd remap for joplin
+-- \(.*\)\n\\t\(.*\)/<details>\r<summary><b>\r\1\r<\/b><\/summary>\r\2\r<\/details>\r<br>
+
+
 local function toggle_quickfix()
   local qf_exists = false
   -- Check if any window in the current tab is a quickfix window

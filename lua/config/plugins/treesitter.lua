@@ -89,6 +89,9 @@ return {
       'snacks_dashboard',
       'snacks_notif',
       'snacks_win',
+      'undotree',
+      'NvimTree',
+      'text',
     }
 
     -- Auto-install parsers and enable highlighting on FileType
