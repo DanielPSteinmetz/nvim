@@ -1,14 +1,15 @@
 return {
   {
-    "windwp/nvim-autopairs",
-    event = "InsertEnter",
-    config = function()
-      local npairs = require("nvim-autopairs")
+    'jiangmiao/auto-pairs',
+    -- "windwp/nvim-autopairs",
+    -- event = "InsertEnter",
+    -- config = function()
+    --   local npairs = require("nvim-autopairs")
 
-      npairs.setup({
-        check_ts = true,
-      })
-    end,
+    --   npairs.setup({
+    --     check_ts = true,
+    --   })
+    -- end,
   },
   {
     "windwp/nvim-ts-autotag",

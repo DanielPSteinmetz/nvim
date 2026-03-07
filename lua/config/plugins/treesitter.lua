@@ -22,6 +22,10 @@ return {
       return ok
     end
 
+    -- use html highlighting for handlebars
+    vim.treesitter.language.register('html', 'hbs')
+    vim.treesitter.language.register('html', 'handlebars')
+
     -- Install core parsers after lazy.nvim finishes loading all plugins
     vim.api.nvim_create_autocmd('User', {
       pattern = 'LazyDone',
@@ -37,7 +41,6 @@ return {
           'git_rebase',
           'gitcommit',
           'gitignore',
-          'help',
           'html',
           'javascript',
           'json',
@@ -56,8 +59,8 @@ return {
           'vim',
           'vimdoc',
         }, {
-          max_jobs = 8,
-        })
+            max_jobs = 8,
+          })
       end,
     })
 
@@ -92,6 +95,14 @@ return {
       'undotree',
       'NvimTree',
       'text',
+      'dap-repl',
+      'dapui_watches',
+      'dapui_breakpoints',
+      'dapui_scopes',
+      'dapui_stacks',
+      'dapui_console',
+      'dapui_hover',
+      'harpoon',
     }
 
     -- Auto-install parsers and enable highlighting on FileType

@@ -17,7 +17,7 @@ return {
       "clangd",
       "pyright",
       "rust_analyzer",
-      "html"
+      "html",
     }
 
     -- Mason
@@ -40,9 +40,9 @@ return {
     })
 
     -- Integrates nvim-autopairs with nvim-cmp
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    local cmp = require('cmp')
-    cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+    -- local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    -- local cmp = require('cmp')
+    -- cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
 
     -- Capabilities (for nvim-cmp)
@@ -73,6 +73,20 @@ return {
       init_options = {
         fallbackFlags = { '-std=c++20' },
       },
+    })
+
+    -- Html for handlebars
+    vim.lsp.config("html", {
+      capabilities = capabilities,
+      filetypes = { "html", "handlebars" },
+      settings = {
+        html = {
+          format = {
+            templating = true,
+          },
+          validate = false,
+        }
+      }
     })
 
     -- Keymaps

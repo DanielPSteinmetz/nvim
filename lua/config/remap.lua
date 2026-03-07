@@ -113,7 +113,7 @@ vim.keymap.set("n", "<leader>r", function()
   local ft = vim.bo.filetype
 
   if ft == "cpp" or ft == "c" then
-    vim.cmd("!make")
+    vim.cmd(":make")
   elseif ft == "rust" then
     vim.cmd("!cargo run")
   elseif ft == "python" then

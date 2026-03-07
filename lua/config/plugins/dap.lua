@@ -92,9 +92,11 @@ return {
           request = "launch",
           name = "Launch",
           cwd = "${workspaceFolder}",
-          program = "${workspaceFolder}/dist/main.js",
+          -- program = "${workspaceFolder}/dist/main.js",
+          program = "${workspaceFolder}/lib/server.js",
           sourceMaps = true,
-          outFiles = { "${workspaceFolder}/dist/**/*.js" },
+          -- outFiles = { "${workspaceFolder}/dist/**/*.js" },
+          outFiles = { "${workspaceFolder}/lib/**/*.js" },
           skipFiles = { "<node_internals>/**" },
         },
       }
